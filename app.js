@@ -1,22 +1,22 @@
-var express = require("express");
-
-
-              var app = express();
-             var passport = require("passport");
-             var LocalStrategy = require("passport-local");
-               var  bodyParser = require("body-parser");
-               var  mongoose = require("mongoose");
-               var Merchant = require("./models/merchants");
-               var User = require("./models/user");
-               
-               var merchantRoutes = require("./routes/merchants");
-               var commentRoutes = require("./routes/comments");
-               var authRoutes = require("./routes/authentication");
-               var methodOverride = require("method-override");
-             
-var seedDB = require("./seeds");
-var Comment = require("./models/comment");
-//seedDB();
+    // Including npm packages
+var express = require("express"),
+    app = express(),
+    passport = require("passport"),
+    LocalStrategy = require("passport-local"),
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose"),
+    // Declaring Models
+    Merchant = require("./models/merchants"),
+    User = require("./models/user"),
+    Comment = require("./models/comment"),
+    // Declaring routes and method override
+    merchantRoutes = require("./routes/merchants"),
+    commentRoutes = require("./routes/comments"),
+    authRoutes = require("./routes/authentication"),
+    methodOverride = require("method-override"),
+    // Seeding the db
+    seedDB = require("./seeds");
+    //seedDB();
 
 mongoose.connect("mongodb://localhost/banana");
 app.use(bodyParser.urlencoded({extended: true}));

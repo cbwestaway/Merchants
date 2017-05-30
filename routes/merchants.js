@@ -84,7 +84,7 @@ router.delete("/merchants/:id", isLoggedIn, function(req, res){
 
 
 // merchant show page
-router.get("/merchants/:id", function(req, res){
+router.get("/merchants/:id", isLoggedIn, function(req, res){
     // finds campground with required id
     Merchant.findById(req.params.id).populate("comments").exec(function(err, foundMerchant){
         if(err){
