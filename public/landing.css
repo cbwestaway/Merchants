@@ -29,8 +29,8 @@ ul{
 
 
 .btn-primary{
-    background-color: brown;
-    border-color: brown;
+    background-color: #565444;
+    border-color: #565444;
     left: 50%;
     margin-left: -75px;
     top: 150%;
@@ -39,6 +39,16 @@ ul{
     padding: 25px;
     position: absolute;
     display: block;
+}
+
+.btn-primary:hover{
+    background-color: #565444;
+    border-color: #565444;
+}
+
+.btn-primary:active{
+    background-color: #565444;
+    border-color: #565444;
 }
 .slideshow{
     position: fixed;

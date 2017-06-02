@@ -38,6 +38,35 @@ router.post("/merchants/:id", isLoggedIn,  function(req, res){
     });
 });
 
+//edit comment form
+router.get("/merchants/:id/comments/:comment_id/edit", isLoggedIn, function(req, res){
+Comment.findById(req.params.comment_id, function(err, thisComment){
+    res.render("comments/edit", {merchant: req.params.id, comment: thisComment});
+    });
+ });
+
+//put edit
+router.put("/merchants/:id/comments/:comment_id",isLoggedIn, function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+        if(err){
+            res.redirect("/merchants");
+        }else{
+            res.redirect("/merchants/" + req.params.id);
+        }
+    });
+});
+
+//delete form
+router.delete("/merchants/:id/:comment_id", isLoggedIn, function(req, res){
+  Comment.findByIdAndRemove(req.params.comment_id, function(err){
+      if(err){
+          res.redirect("/merchants/" + req.params.id);
+      }else{
+          res.redirect("/merchants/" + req.params.id);
+      }
+  }); 
+});
+
 //Middleware
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){

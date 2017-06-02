@@ -36,7 +36,7 @@ router.post("/merchants", isLoggedIn, function(req, res){
             var location = data.results[0].formatted_address;
 
     var newMerchant = {name: name, image: image, description: desc, author: author, location: location, lat: lat, lng: lng};
-    // add a campground
+    // add a merchant
     Merchant.create(newMerchant, function(err, created){
         if(err){
             console.log("error" + err);
@@ -85,7 +85,7 @@ router.delete("/merchants/:id", isLoggedIn, function(req, res){
 
 // merchant show page
 router.get("/merchants/:id", isLoggedIn, function(req, res){
-    // finds campground with required id
+    // finds merchant with required id
     Merchant.findById(req.params.id).populate("comments").exec(function(err, foundMerchant){
         if(err){
             console.log(err);
