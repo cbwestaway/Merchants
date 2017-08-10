@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class ="row"> 
+        <h1 style="text-align: center;">Add a Merchant</h1>
+        <div style="width:30%; margin: 35px auto;">
+            <form action="/merchants" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="name" name="name">
+                </div>
+                 <div class="form-group">
+                    <input class="form-control" type="text" placeholder="image url" name="image">
+                </div>
+                 <div class="form-group">
+                    <input class="form-control" type="text" placeholder="location" id="location" name="location">
+                </div>
+                 <!--<input id="address" type="textbox" name="location" value="Sydney, NSW">-->
+                 <!-- <input id="submit" type="button" value="Geocode">-->
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="description" name="description">
+                </div>
+                 <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div> 
+<% include ../partials/footer %>

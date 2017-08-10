@@ -1,0 +1,16 @@
+.btn-primary{
+    background-color: #e8e417;
+    border-color: #e8e417;
+}
+
+body{
+    background-color: purple;
+}
+
+*{
+    color: red;
+}
+
+#map {
+        height: 100%;
+      }

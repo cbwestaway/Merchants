@@ -4,8 +4,7 @@
         <div class="col-md-3">
             <p class="lead">Banana Yelp</p>
             <div class="list-group">
-                <li class="list-group-item"></li>
-                <li class="list-group-item">Comments</li>
+                <li class="list-group-item" id="commentShow">Comments</li>
                 <li class="list-group-item" id="submit" type="button" value="Geocode"><input id="address" value="<%= merchant.location%>">Map</li>
             </div>
         <div class="well" id="mapwell">
@@ -21,17 +20,17 @@
                 <p>Created by <%= merchant.author.username %></p>
                  <% if (currentUser.username == merchant.author.username){ %>
                 <div class="container">
-                    <div class="row">
+                    <div class="row edits">
                             <p>
-                                <a class="btn btn-success" href="/merchants/<%= merchant._id %>/edit">Edit</a>
+                                <a class="btn btn-success edits" href="/merchants/<%= merchant._id %>/edit">Edit</a>
                             </p>
-                            <form method="POST" action="/merchants/<%= merchant._id %>?_method=DELETE">
-                                <button class="btn btn-danger" type="submit">delete</button>
+                            <form class="edits" method="POST" action="/merchants/<%= merchant._id %>?_method=DELETE">
+                                <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
-                </div>
+                    </div>
                 <% } console.log(merchant.lat + " " + merchant.lng);%>
             </div>
-            <div class="well">
+            <div class="well" id="commentDisplay">
                 <div class="text-right">
                     <p>
                         <a class="btn btn-success" id="commentbtn" href="/merchants/<%= merchant._id %>/comments/new">Add a Comment</a>

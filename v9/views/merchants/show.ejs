@@ -1,0 +1,119 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Banana Yelp</p>
+            <div class="list-group">
+                <li class="list-group-item active"></li>
+                <li class="list-group-item"></li>
+                <li class="list-group-item"></li>
+            </div>
+            <div id="floating-panel">
+          <input id="address" type="textbox" value="Sydney, NSW">
+          <input id="submit" type="button" value="Geocode">
+        </div>
+        <div style="width: 300px; height: 300px;">
+            <div id="map" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        
+    
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= merchant.image %>">
+                 <h4><a><%= merchant.name %></a></h4>
+                <p><%= merchant.description %></p>
+                <p>Created by <%= merchant.author.username %></p>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <p>
+                        <a class="btn btn-success" href="/merchants/<%= merchant._id %>/comments/new">Add a Comment</a>
+                    </p>
+                </div>
+                <% merchant.comments.forEach(function(comment){ %>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <strong><%= comment.author.username %></strong>
+                        <span class="">10 days ago</span>
+                        <p>
+                         - <%= comment.text %>
+                        </p>
+                    </div>
+                    <% }); %>
+                </div>
+                <% if (currentUser.username == merchant.author.username){ %>
+                <div class="text-left">
+                    <p>
+                        <a class="btn btn-success" href="/merchants/<%= merchant._id %>/edit">Edit</a>
+                    </p>
+                </div>
+                <% } console.log(merchant.lat + " " + merchant.lng);%>
+            </div>
+        </div>
+    </div>
+</div>
+// <script>
+//   function initMap() {
+//     var lat = <%= merchant.lat %>;
+//     var lng = <%= merchant.lng %>;
+//     var center = {lat: lat, lng: lng };
+//     var map = new google.maps.Map(document.getElementById("map"), {
+//         zoom: 8,
+//         center: center,
+//         scrollwheel: false
+//     });
+//     var contentString = `
+//       <strong><%= merchant.name %><br />
+//       <%= merchant.location %></strong>
+//       <p><%= merchant.description %></p>
+//     `console.log(merchant.name + "WORKING?" + merchant.location);
+//     var infowindow = new google.maps.InfoWindow({
+//       content: contentString
+//     });
+//     var marker = new google.maps.Marker({
+//         position: center,
+//         map: map
+//     });
+//     marker.addListener('click', function() {
+//       infowindow.open(map, marker);
+//     });
+//   }
+// </script>
+// <% console.log("2"); %>
+//  <script async defer
+//     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeNgEvun9jGH_ZSjNDF0eurvlvm-W53AE&callback=initMap">
+//     </script>
+ <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeNgEvun9jGH_ZSjNDF0eurvlvm-W53AE&callback=initMap">
+    </script>
+<% console.log("3"); %>
+<% include ../partials/footer %>
